@@ -36,7 +36,7 @@ public class AgentLoop
             {
                 ["model"] = _model,
                 ["messages"] = JsonNode.Parse(messages.ToJsonString()),
-                ["tools"] = JsonNode.Parse(toolSchemas.ToJsonString())
+                ["tools"] = JsonNode.Parse(toolSchemas.ToJsonString()),
             };
             var request = new HttpRequestMessage(HttpMethod.Post, $"{_baseUrl}/chat/completions")
             {

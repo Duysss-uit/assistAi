@@ -25,5 +25,6 @@ new WriteTool();
 new BashTool();
 new WebSearchTool();
 new WebScraperTool();
+new OpenBrowserTool();
 var agent = new AgentLoop(apiKey, baseUrl);
 await agent.RunAsync(prompt);
