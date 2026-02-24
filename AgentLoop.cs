@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using AiAgent.Tools;
+using AiAgent.Models;
 
 namespace AiAgent;
 public class AgentLoop
@@ -11,13 +12,23 @@ public class AgentLoop
     private readonly string _apiKey;
     private readonly string _baseUrl;
     private readonly string _model;
-    public AgentLoop(string apiKey, string baseUrl, string model = "arcee-ai/trinity-large-preview:free")
+
+    public AgentLoop(Model model)
     {
-        _apiKey = apiKey;
-        _baseUrl = baseUrl;
-        _model = model;
+        // Kiểm tra các thông tin bắt buộc
+        if (string.IsNullOrEmpty(model.ApiKey))
+            throw new InvalidOperationException("OPENROUTER_API_KEY is not set");
+        if (string.IsNullOrEmpty(model.BaseUrl))
+            throw new InvalidOperationException("OPENROUTER_BASE_URL is not set");
+        if (string.IsNullOrEmpty(model.ModelId))
+            throw new InvalidOperationException("Model is not selected");
+
+        _apiKey = model.ApiKey;
+        _baseUrl = model.BaseUrl;
+        _model = model.ModelId;
         _httpClient = new HttpClient();
     }
+
     public async Task RunAsync(string prompt)
     {
         var messages = new JsonArray

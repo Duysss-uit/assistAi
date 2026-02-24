@@ -1,30 +1,39 @@
 ﻿using AiAgent;
 using AiAgent.Tools;
-DotNetEnv.Env.Load();
-var apiKey = Environment.GetEnvironmentVariable("OPENROUTER_API_KEY");
-var baseUrl = Environment.GetEnvironmentVariable("OPENROUTER_BASE_URL") 
-              ?? "https://openrouter.ai/api/v1";
-if (string.IsNullOrEmpty(apiKey))
-    throw new InvalidOperationException("OPENROUTER_API_KEY is not set");
-string? prompt = null;
-for (int i = 0; i < args.Length; i++)
-{
-    if (args[i] == "-p" && i + 1 < args.Length)
-    {
-        prompt = args[i + 1];
-        break;
-    }
-}
-if (string.IsNullOrEmpty(prompt))
-{
-    Console.WriteLine("Usage: dotnet run -- -p \"your prompt here\"");
-    return;
-}
+using AiAgent.Models;
+
+// Đăng ký tất cả tools
 new ReadTool();
 new WriteTool();
 new BashTool();
 new WebSearchTool();
 new WebScraperTool();
 new OpenBrowserTool();
-var agent = new AgentLoop(apiKey, baseUrl);
-await agent.RunAsync(prompt);
+void changeModel(Model model){
+    model.ModelId = model.ModelChoosing();
+}
+var model = new Model();
+string? prompt = null;
+var agent = new AgentLoop(model);
+while(true){
+    Console.Write("User: ");
+    prompt = Console.ReadLine().Trim();
+    if(string.IsNullOrEmpty(prompt)){
+        continue;
+    }
+    if(prompt.StartsWith("/")){
+        if(prompt == "/model"){
+            changeModel(model);
+            agent = new AgentLoop(model);
+            continue;
+        }
+        if(prompt == "/clear"){
+            Console.Clear();
+            continue;
+        }
+        if(prompt == "/exit"){
+            break;
+        }
+    }
+    await agent.RunAsync(prompt);
+}
