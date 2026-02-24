@@ -34,6 +34,10 @@ while(true){
         if(prompt == "/exit"){
             break;
         }
+        if(prompt == "/help"){
+            Console.WriteLine("| Command  | Description                  | \n|----------|------------------------------|\n| `/model` | Switch to a different model |\n| `/clear` | Clear the console           |\n| `/exit`  | Exit the program            |");
+            continue;
+        }
     }
     await agent.RunAsync(prompt);
 }
