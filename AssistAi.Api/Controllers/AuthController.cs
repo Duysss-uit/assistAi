@@ -31,7 +31,7 @@ public class AuthController : ControllerBase
         var user = await _authService.RegisterAsync(request.Username, request.Email, request.Password);
         if (user == null)
         {
-            return BadRequest(new { Message = "Email of Username already exists" });
+            return BadRequest(new { Message = "Email or Username already exists" });
         }
         return Ok(new { Message = "User registered successfully" });
     }

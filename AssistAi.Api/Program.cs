@@ -13,9 +13,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddControllers();
-
-var app = builder.Build();
-var secretKey = builder.Configuration["Jwt:Key"] ?? "DayLaMotCaiKeyBiMatSieuDaiVaSieuBaoMatChoAssistAiThemNhieuChuVaoDay";
+var secretKey = builder.Configuration["Jwt:Key"]
+    ?? throw new InvalidOperationException("JWT secret key 'Jwt:Key' is not configured.");
 var key = Encoding.ASCII.GetBytes(secretKey);
 builder.Services.AddAuthentication(options =>
 {
@@ -34,6 +33,7 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = false
     };
 });
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
