@@ -42,19 +42,24 @@ public class AuthService
     }
     public async Task<User?> RegisterAsync(string username, string email, string password)
     {
+        bool userExists = await _context.Users.AnyAsync(u => u.Username == username || u.Email == email);
+        if (userExists)
+        {
+            return null;
+        }
         var user = new User { Username = username, Email = email };
         user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
         await _context.Users.AddAsync(user);
         await _context.SaveChangesAsync();
         return user;
     }
-    public async Task<User?> LoginAsync(string username, string password)
+    public async Task<string?> LoginAsync(string username, string password)
     {
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
         if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
         {
             return null;
         }
-        return user;
+        return GenerateJwtToken(user);
     }
 }
