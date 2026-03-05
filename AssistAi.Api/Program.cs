@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using AssistAi.Api.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -33,6 +34,9 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = false
     };
 });
+builder.Services.AddScoped<ChatService>();
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<UsageService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
