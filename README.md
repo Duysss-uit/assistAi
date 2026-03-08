@@ -1,61 +1,45 @@
-# AssistAI
+# AssistAI API
 
-A CLI-based AI agent built with C# that can search the web, scrape pages, and open your browser — all powered by LLMs via OpenRouter.
+AssistAI is now a backend-focused project: an ASP.NET Core Web API with static web pages served from `wwwroot`.
 
-## Features
+## Project Layout
 
-- **Web Search** — Search DuckDuckGo and get results
-- **Web Scraper** — Extract text content from any URL
-- **Open Browser** — Open URLs in your default browser
-- **Read/Write Files** — Read and write local files
-- **Bash** — Execute shell commands
-- **Model Selector** — Choose from multiple free LLMs
+- `AssistAi.Api/Controllers/`: API endpoints (`AuthController`, `ChatController`, `ModelsController`)
+- `AssistAi.Api/Services/`: business logic (`AuthService`, `ChatService`, `UsageService`)
+- `AssistAi.Api/Data/`: EF Core DbContext
+- `AssistAi.Api/Models/`: entity models
+- `AssistAi.Api/Migrations/`: EF Core migrations
+- `AssistAi.Api/wwwroot/`: frontend pages (`index.html`, `login.html`, CSS/JS)
 
-## Setup
+## Prerequisites
 
 1. Install [.NET 10 SDK](https://dotnet.microsoft.com/download)
-2. Clone and navigate to the project:
-   ```bash
-   git clone https://github.com/Duysss-uit/assistAi.git
-   cd assistAi
-   ```
-3. Create a `.env` file:
-   ```env
-   OPENROUTER_API_KEY=your-api-key-here
-   ```
-4. Get a free API key at [openrouter.ai](https://openrouter.ai)
+2. Configure API settings in `AssistAi.Api/appsettings.json` or environment variables:
+   - `ConnectionStrings:DefaultConnection`
+   - `Jwt:Key`
+   - `OpenRouter:ApiKey`
 
-## Usage
+## Run Locally
 
 ```bash
-dotnet run
+dotnet restore .\AssistAi.Api\AssistAi.Api.csproj
+dotnet run --project .\AssistAi.Api\AssistAi.Api.csproj
 ```
 
-Select a model, then start chatting:
+- API and static frontend are served by the same app.
+- Default static entry page: `/` -> `wwwroot/index.html`.
 
+## Development Commands
+
+```bash
+dotnet build .\AssistAi.Api\AssistAi.Api.csproj -v minimal
+dotnet watch run --project .\AssistAi.Api\AssistAi.Api.csproj
 ```
-Select model:
-  1. step-3.5-flash
-  2. trinity-large-preview
-  ...
-Enter number: 2
-
-User: Search the web for C# tutorials
-AI: (searches DuckDuckGo and summarizes results)
-```
-
-### Slash Commands
-
-| Command | Description |
-|---------|-------------|
-| `/model` | Switch to a different model |
-| `/clear` | Clear the console |
-| `/exit` | Exit the program |
-| `/help` | Show this help message |
 
 ## Tech Stack
 
-- **C# / .NET 10** — Core language and runtime
-- **OpenRouter API** — LLM gateway (supports multiple models)
-- **HtmlAgilityPack** — HTML parsing for web scraping
-- **DotNetEnv** — Environment variable management
+- C# / .NET 10
+- ASP.NET Core Web API
+- Entity Framework Core + SQLite
+- JWT Authentication
+- Static frontend (HTML/CSS/JS in `wwwroot`)

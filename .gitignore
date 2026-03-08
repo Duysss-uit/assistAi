@@ -5,3 +5,8 @@ obj/
 .agents/*
 .vscode/*
 AssistAi.Api/appsettings.json
+AssistAi.Api/assistai.db
+AssistAi.Api/assistai.db-*
+AssistAi.Api/report/
+.dotnet/
+.nuget/

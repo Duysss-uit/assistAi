@@ -14,6 +14,18 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddControllers();
+
+// CORS — cho phép frontend gọi API từ cùng origin
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 var secretKey = builder.Configuration["Jwt:Key"]
     ?? throw new InvalidOperationException("JWT secret key 'Jwt:Key' is not configured.");
 var key = Encoding.ASCII.GetBytes(secretKey);
@@ -41,8 +53,19 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.UseHttpsRedirection();
+app.UseCors("AllowAll");       // Cho phép CORS
+// app.UseHttpsRedirection(); // Tạm bỏ — gây lỗi "Failed to fetch" khi chạy HTTP ở development
+
+// Phục vụ file tĩnh từ wwwroot/ (HTML, CSS, JS)
+app.UseDefaultFiles();         // Tự động phục vụ index.html khi truy cập /
+app.UseStaticFiles();          // Phục vụ các file tĩnh (css, js, images,...)
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
+// SPA fallback — nếu không tìm thấy route API, trả về index.html
+app.MapFallbackToFile("index.html");
+
 app.Run();
+
