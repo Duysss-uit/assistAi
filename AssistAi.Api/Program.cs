@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using AssistAi.Api.Services;
+using Stripe;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -49,6 +50,13 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddScoped<ChatService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<UsageService>();
+builder.Services.AddScoped<PaymentService>();
+
+var stripeSecretKey = builder.Configuration["Stripe:SecretKey"];
+if (!string.IsNullOrWhiteSpace(stripeSecretKey))
+{
+    StripeConfiguration.ApiKey = stripeSecretKey;
+}
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

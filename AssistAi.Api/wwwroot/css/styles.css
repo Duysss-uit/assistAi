@@ -304,6 +304,28 @@ body {
     background: rgba(248, 113, 113, 0.1);
 }
 
+/* Upgrade button in sidebar footer */
+.btn-upgrade-sidebar {
+    background: none;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: var(--accent-purple);
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.btn-upgrade-sidebar:hover {
+    background: rgba(168, 85, 247, 0.12);
+    border-color: rgba(168, 85, 247, 0.5);
+    transform: scale(1.1);
+}
+
+
 /* ---------- Sidebar Toggle (Mobile) ---------- */
 .sidebar-toggle {
     display: none;

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AssistAi Pricing — Simple, transparent pricing for everyone.">
+    <title>AssistAi — Pricing</title>
+
+    <!-- Google Fonts: Space Grotesk -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/pricing.css">
+</head>
+
+<body>
+
+    <!-- ====== Navigation ====== -->
+    <nav class="nav">
+        <div class="nav-brand">
+            <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+                <defs>
+                    <linearGradient id="navLogoGrad" x1="0" y1="0" x2="40" y2="40">
+                        <stop offset="0%" stop-color="#a855f7" />
+                        <stop offset="100%" stop-color="#6366f1" />
+                    </linearGradient>
+                </defs>
+                <rect rx="10" width="40" height="40" fill="url(#navLogoGrad)" />
+                <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" fill="#fff" font-size="18"
+                    font-weight="700" font-family="Space Grotesk">Ai</text>
+            </svg>
+            <span class="nav-brand-text">AssistAi</span>
+        </div>
+        <a href="/" class="nav-back-link" id="btn-back-to-chat">
+            ← Back to Chat
+        </a>
+    </nav>
+
+    <!-- ====== Main Content ====== -->
+    <main class="pricing-main">
+
+        <!-- Hero -->
+        <section class="hero">
+            <h1 class="hero-title">Simple, Transparent Pricing</h1>
+            <p class="hero-subtitle">Start for free. Upgrade when you're ready.<br>All plans include our core AI assistance capabilities.</p>
+        </section>
+
+        <!-- Success / Cancel Banners -->
+        <div class="banner banner-success" id="banner-success" style="display:none;">
+            ✅ Payment successful! Your account has been upgraded to <strong>Pro</strong>. Welcome aboard!
+        </div>
+        <div class="banner banner-cancel" id="banner-cancel" style="display:none;">
+            ❌ Payment was cancelled. You're still on the Free plan. No charges were made.
+        </div>
+
+        <!-- Pricing Cards -->
+        <section class="pricing-cards">
+
+            <!-- Free Card -->
+            <div class="card card-free">
+                <div class="card-header">
+                    <h2 class="plan-name">Free Forever</h2>
+                    <div class="plan-price">
+                        <span class="price-amount">$0</span>
+                        <span class="price-period">/month</span>
+                    </div>
+                    <p class="plan-tagline">Perfect for getting started</p>
+                </div>
+                <ul class="feature-list">
+                    <li class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>10 messages / month</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Access to basic AI models</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Standard response speed</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Community support</span>
+                    </li>
+                </ul>
+                <a href="/" class="btn btn-ghost" id="btn-free">Get Started</a>
+            </div>
+
+            <!-- Pro Card -->
+            <div class="card card-pro">
+                <div class="badge-popular">⚡ Most Popular</div>
+                <div class="card-header">
+                    <h2 class="plan-name">Pro</h2>
+                    <div class="plan-price">
+                        <span class="price-amount">$9.99</span>
+                        <span class="price-period">/month</span>
+                    </div>
+                    <p class="plan-tagline">For power users & professionals</p>
+                </div>
+                <ul class="feature-list">
+                    <li class="feature-item">
+                        <span class="feature-icon feature-icon-pro">✓</span>
+                        <span>100 messages / month</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon feature-icon-pro">✓</span>
+                        <span>Access to <strong>all</strong> advanced AI models</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon feature-icon-pro">✓</span>
+                        <span>Priority response speed</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon feature-icon-pro">✓</span>
+                        <span>Dedicated email support</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon feature-icon-pro">✓</span>
+                        <span>Early access to new features</span>
+                    </li>
+                </ul>
+                <button class="btn btn-gradient" id="btn-upgrade">
+                    <span id="btn-upgrade-text">Upgrade to Pro</span>
+                </button>
+                <p class="card-note">Cancel anytime • No hidden fees</p>
+            </div>
+
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq">
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary class="faq-question">Can I cancel anytime?</summary>
+                    <p class="faq-answer">Yes! You can cancel your Pro subscription at any time from the billing portal. Your plan stays active until the end of the billing period.</p>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">What payment methods are accepted?</summary>
+                    <p class="faq-answer">We accept all major credit and debit cards (Visa, Mastercard, Amex) via Stripe. All payments are processed securely.</p>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">Is there a free trial for Pro?</summary>
+                    <p class="faq-answer">Our Free plan lets you try the core features before committing. Start free, upgrade when you're ready — no credit card required for the Free plan.</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- Footer note -->
+        <p class="stripe-note">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            Powered by Stripe &bull; Secure payments &bull; SSL encrypted
+        </p>
+
+    </main>
+
+    <script src="/js/pricing.js"></script>
+</body>
+
+</html>
